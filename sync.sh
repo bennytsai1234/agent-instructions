@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOMES=("$HOME" "/mnt/c/Users/045650")
+HOMES=("/home/benny" "/mnt/c/Users/benny")
 
 sync_one() {
   local target="$1"; shift
