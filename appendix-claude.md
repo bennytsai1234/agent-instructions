@@ -1,7 +1,7 @@
 
 ---
 
-## 六 · 委派 Codex
+## 五 · 委派 Codex
 
 **不要把 worktree 和背景執行混用。** Agent 的 `isolation:"worktree"` 配上 `run_in_background`（或 companion `--background`），harness 會把臨時 worktree 清掉，Codex 卡在那裡跑不完也沒有產出。這是 codex-plugin-cc 已知的 open bug。
 
