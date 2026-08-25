@@ -25,6 +25,15 @@ Windows 家目錄 `C:\Users\benny\` 與 WSL 家目錄 `/home/benny/` 各一份�
 
 ## 同步
 
+依電腦使用者帳號選擇對應的同步腳本，只執行其中一支：
+
+- `benny` 電腦：使用第一支腳本 `./sync.sh`
+- `045650` 電腦：使用第二支腳本 `bash ./sync2.sh`
+
 ```bash
+# benny
 ./sync.sh
+
+# 045650
+bash ./sync2.sh
 ```
