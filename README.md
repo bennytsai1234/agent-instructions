@@ -8,7 +8,6 @@
 |---|---|
 | `core.md` | 共用核心，四個工具都一樣 |
 | `appendix-codex.md` | Codex 專屬（子代理併發） |
-| `appendix-claude.md` | Claude Code 專屬（委派 Codex） |
 
 ## 同步位置
 
@@ -17,7 +16,7 @@ Windows 家目錄 `C:\Users\benny\` 與 WSL 家目錄 `/home/benny/` 各一份�
 | 位置 | 組成 |
 |---|---|
 | `.codex/AGENTS.md` | core + appendix-codex |
-| `.claude/CLAUDE.md` | core + appendix-claude |
+| `.claude/CLAUDE.md` | core |
 | `.config/opencode/AGENTS.md` | core |
 | `.gemini/antigravity-cli/AGENTS.md` | core |
 | `.gemini/GEMINI.md` | core |

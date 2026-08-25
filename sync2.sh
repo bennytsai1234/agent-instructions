@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# 把 core.md（加上工具專屬附錄）同步到各個全域指示檔位置。
+# 本機專屬同步。把 core.md（加上工具專屬附錄）同步到各全域指示檔。
+# 只寫 Windows 家目錄 045650；WSL 家目錄的 .codex/AGENTS.md 與 .claude/CLAUDE.md
+# 已是指向這裡的 symlink，會自動讀到同一份。
 # 目標檔尾端由 codebase-memory-mcp 注入的區塊會原樣保留。
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOMES=("/home/benny" "/mnt/c/Users/benny")
+HOMES=("/mnt/c/Users/045650")
 
 sync_one() {
   local target="$1"; shift
