@@ -1,39 +1,25 @@
-# 全域使用者指示
+# Agent Instructions
 
-給 AI coding agent 讀的全域指示檔。核心保留跨任務都會改變行為的規則，工具與領域細節由附錄或技能按需提供。
+給 Codex、Claude、OpenCode、Gemini 等 coding agent 使用的共用全域指示。
 
-## 內容
-
-| 檔案 | 用途 |
-|---|---|
-| `core.md` | 共用核心，四個工具都一樣 |
-| `appendix-codex.md` | Codex 專屬（子代理併發） |
-
-## 同步位置
-
-Windows 家目錄 `C:\Users\benny\` 與 WSL 家目錄 `/home/benny/` 各一份。
-
-| 位置 | 組成 |
-|---|---|
-| `.codex/AGENTS.md` | core + appendix-codex |
-| `.claude/CLAUDE.md` | core |
-| `.config/opencode/AGENTS.md` | core |
-| `.gemini/antigravity-cli/AGENTS.md` | core |
-| `.gemini/GEMINI.md` | core |
-
-各檔案尾端由 codebase-memory-mcp 自動注入的區塊（`<!-- codebase-memory-mcp:start -->` 到 `:end`）原樣保留，同步時不覆蓋。
+`AGENTS.md` 是唯一的 canonical source。這個 repository 只維護跨專案都成立的工作法則；主機資訊、公司平台規則、專案架構與特定工作流改用專案文件或 Skills 按需載入。
 
 ## 同步
 
-依電腦使用者帳號選擇對應的同步腳本，只執行其中一支：
-
-- `benny` 電腦：使用第一支腳本 `./sync.sh`
-- `045650` 電腦：使用第二支腳本 `bash ./sync2.sh`
+只需要執行一支腳本：
 
 ```bash
-# benny
 ./sync.sh
-
-# 045650
-bash ./sync2.sh
 ```
+
+腳本會偵測目前機器上存在的 home，將 `AGENTS.md` 同步到：
+
+- `.codex/AGENTS.md`
+- `.claude/CLAUDE.md`
+- `.config/opencode/AGENTS.md`
+- `.gemini/antigravity-cli/AGENTS.md`
+- `.gemini/GEMINI.md`
+
+目前支援 `/home/benny`、`/mnt/c/Users/benny`、`/mnt/c/Users/045650`。不存在的目標會明確顯示為 skipped。
+
+目標檔尾端若有 `codebase-memory-mcp` 自動注入區塊，會原樣保留。
