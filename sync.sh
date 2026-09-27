@@ -7,6 +7,7 @@ SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOMES=(
   "/home/benny"
   "/mnt/c/Users/benny"
+  "/c/Users/benny"
   "/mnt/c/Users/045650"
 )
 
