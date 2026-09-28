@@ -20,16 +20,7 @@ sync_one() {
     return 0
   fi
 
-  local mcp=""
-  if [ -f "$target" ]; then
-    mcp="$(sed -n '/<!-- codebase-memory-mcp:start -->/,/<!-- codebase-memory-mcp:end -->/p' "$target")"
-  fi
-
   cat "$SRC/AGENTS.md" > "$target.tmp"
-  if [ -n "$mcp" ]; then
-    printf '\n' >> "$target.tmp"
-    printf '%s\n' "$mcp" >> "$target.tmp"
-  fi
   mv "$target.tmp" "$target"
   echo "  synced $target"
 }
