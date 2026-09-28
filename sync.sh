@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Sync the canonical AGENTS.md into the global instruction entrypoints that exist on this machine.
-# Preserve the codebase-memory-mcp block already injected at the end of a target file.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

@@ -23,5 +23,3 @@
 目前支援 `/home/benny`、`/mnt/c/Users/benny`、`/c/Users/benny`（Git Bash）、`/mnt/c/Users/045650`。不存在的目標會明確顯示為 skipped。
 
 `.claude/CLAUDE.md` 是 Claude Code 唯一的使用者層級入口：Claude Code 的 `AGENTS.md` 支援只在專案層級生效（專案沒有 `CLAUDE.md` 時讀取），不會讀 `~/.claude/AGENTS.md`。這個檔案只是同步產物，不要直接編輯。
-
-目標檔尾端若有 `codebase-memory-mcp` 自動注入區塊，會原樣保留。
