@@ -8,6 +8,7 @@ HOMES=(
   "/mnt/c/Users/benny"
   "/c/Users/benny"
   "/mnt/c/Users/045650"
+  "/c/Users/045650"
 )
 
 sync_one() {
