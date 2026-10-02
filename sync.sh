@@ -11,10 +11,10 @@ HOMES=(
   "/c/Users/045650"
 )
 
-# Usage: sync_one <target> [extra source appended after AGENTS.md]
+# Usage: sync_one <target> [extra sources appended after AGENTS.md, in order]
 sync_one() {
   local target="$1"
-  local extra="${2:-}"
+  shift
   local dir
   dir="$(dirname "$target")"
 
@@ -23,7 +23,7 @@ sync_one() {
     return 0
   fi
 
-  cat "$SRC/AGENTS.md" ${extra:+"$SRC/$extra"} > "$target.tmp"
+  (cd "$SRC" && cat AGENTS.md "$@") > "$target.tmp"
   mv "$target.tmp" "$target"
   echo "  synced $target"
 }
@@ -33,7 +33,7 @@ for h in "${HOMES[@]}"; do
   [ -d "$h" ] || continue
   found_home=1
   echo "$h"
-  sync_one "$h/.codex/AGENTS.md" AGENTS.codex.md
+  sync_one "$h/.codex/AGENTS.md" AGENTS.gpt.md
   sync_one "$h/.claude/CLAUDE.md"
   sync_one "$h/.config/opencode/AGENTS.md"
   sync_one "$h/.gemini/antigravity-cli/AGENTS.md"
@@ -47,9 +47,9 @@ fi
 # ChatGPT has no file entrypoint and is updated by manual paste, so stamp the build with the
 # commit it came from; comparing stamps is how a stale paste gets noticed.
 version="$(git -C "$SRC" log -1 --format='%cd · %h' --date=short)"
-if [ -n "$(git -C "$SRC" status --porcelain -- AGENTS.md AGENTS.chatgpt.md)" ]; then
+if [ -n "$(git -C "$SRC" status --porcelain -- AGENTS.md AGENTS.gpt.md AGENTS.chatgpt.md)" ]; then
   version="$version（含未提交修改）"
 fi
 mkdir -p "$SRC/dist"
-{ printf '版本：%s\n\n' "$version"; cat "$SRC/AGENTS.md" "$SRC/AGENTS.chatgpt.md"; } > "$SRC/dist/chatgpt.md"
+{ printf '版本：%s\n\n' "$version"; cat "$SRC/AGENTS.md" "$SRC/AGENTS.gpt.md" "$SRC/AGENTS.chatgpt.md"; } > "$SRC/dist/chatgpt.md"
 echo "built $SRC/dist/chatgpt.md"

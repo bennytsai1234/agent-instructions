@@ -20,9 +20,9 @@
 - `.gemini/antigravity-cli/AGENTS.md`
 - `.gemini/GEMINI.md`
 
-`AGENTS.codex.md` 是只給 Codex（GPT-6.1 Sol）的補充，同步時接在 `.codex/AGENTS.md` 的 `AGENTS.md` 內容後面，其他目標不含這段。
+`AGENTS.gpt.md` 是給 GPT 模型（Codex 與 ChatGPT）共用的補充，同步時接在 `AGENTS.md` 內容後面，其他目標不含這段。`AGENTS.chatgpt.md` 是只給 ChatGPT 的補充。
 
-ChatGPT 沒有可同步的檔案入口，腳本會另外產出 `dist/chatgpt.md`（`AGENTS.md` 接 `AGENTS.chatgpt.md`），手動貼到 ChatGPT 的自訂指令或 Project 指示。檔案第一行是版本（commit 日期與 hash），ChatGPT 裡貼的版本和這行不同就代表過期了。
+ChatGPT 沒有可同步的檔案入口，腳本會另外產出 `dist/chatgpt.md`（`AGENTS.md` → `AGENTS.gpt.md` → `AGENTS.chatgpt.md`），手動貼到 ChatGPT 的自訂指令或 Project 指示。檔案第一行是版本（commit 日期與 hash），ChatGPT 裡貼的版本和這行不同就代表過期了。
 
 目前支援 `/home/benny`、`/mnt/c/Users/benny`、`/c/Users/benny`（Git Bash）、`/mnt/c/Users/045650`、`/c/Users/045650`（Git Bash）。不存在的目標會明確顯示為 skipped。
 
