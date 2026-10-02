@@ -11,8 +11,10 @@ HOMES=(
   "/c/Users/045650"
 )
 
+# Usage: sync_one <target> [extra source appended after AGENTS.md]
 sync_one() {
   local target="$1"
+  local extra="${2:-}"
   local dir
   dir="$(dirname "$target")"
 
@@ -21,7 +23,7 @@ sync_one() {
     return 0
   fi
 
-  cat "$SRC/AGENTS.md" > "$target.tmp"
+  cat "$SRC/AGENTS.md" ${extra:+"$SRC/$extra"} > "$target.tmp"
   mv "$target.tmp" "$target"
   echo "  synced $target"
 }
@@ -31,7 +33,7 @@ for h in "${HOMES[@]}"; do
   [ -d "$h" ] || continue
   found_home=1
   echo "$h"
-  sync_one "$h/.codex/AGENTS.md"
+  sync_one "$h/.codex/AGENTS.md" AGENTS.codex.md
   sync_one "$h/.claude/CLAUDE.md"
   sync_one "$h/.config/opencode/AGENTS.md"
   sync_one "$h/.gemini/antigravity-cli/AGENTS.md"
