@@ -43,3 +43,13 @@ done
 if [ "$found_home" -eq 0 ]; then
   echo "No supported home directory found."
 fi
+
+# ChatGPT has no file entrypoint and is updated by manual paste, so stamp the build with the
+# commit it came from; comparing stamps is how a stale paste gets noticed.
+version="$(git -C "$SRC" log -1 --format='%cd · %h' --date=short)"
+if [ -n "$(git -C "$SRC" status --porcelain -- AGENTS.md AGENTS.chatgpt.md)" ]; then
+  version="$version（含未提交修改）"
+fi
+mkdir -p "$SRC/dist"
+{ printf '版本：%s\n\n' "$version"; cat "$SRC/AGENTS.md" "$SRC/AGENTS.chatgpt.md"; } > "$SRC/dist/chatgpt.md"
+echo "built $SRC/dist/chatgpt.md"
