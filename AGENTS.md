@@ -43,5 +43,5 @@
 - **透明呈現**：清晰交代跑了哪些檢查與真實結果；遇到限制或風險坦白說明，沒問題則不列多餘空項。
 
 ## 6. 維護：指示與技能只改正本
-- **全域指示**：正本是 `~/agent-instructions/AGENTS.md`（GPT 補充在同目錄的 `AGENTS.gpt.md`、`AGENTS.chatgpt.md`），改完執行同目錄的 `sync.sh`，同步到 `~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md` 等入口。入口檔都是同步產物，不直接編輯；CC Switch 的提示詞功能也不用來改。
+- **全域指示**：正本是 `~/agent-instructions/AGENTS.md`（GPT 補充在同目錄的 `AGENTS.gpt.md`、`AGENTS.chatgpt.md`），改完執行同目錄的 `sync.sh`，同步到 `~/.claude/CLAUDE.md`、`~/.codex/AGENTS.md` 等入口。入口檔都是同步產物，不直接編輯。
 - **Skills**：正本是 `~/skills` repo（自己的技能在 `~/skills/<名稱>/`，mattpocock 的放在 `vendor/mattpocock-skills` submodule）。`~/.claude/skills/`、`~/.codex/skills/` 裡的項目是指回正本的 symlink，修改一律改 `~/skills`。哪個技能掛到哪個 agent、哪台機器只寫在 `mounts.conf`，改完執行 `./sync.sh company` 或 `./sync.sh home`；不直接手動建連結或複製技能進去。Codex 內建的 `~/.codex/skills/.system/` 不在這裡管。
