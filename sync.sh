@@ -33,11 +33,15 @@ for h in "${HOMES[@]}"; do
   [ -d "$h" ] || continue
   found_home=1
   echo "$h"
-  sync_one "$h/.codex/AGENTS.md" AGENTS.gpt.md
-  sync_one "$h/.claude/CLAUDE.md"
-  sync_one "$h/.config/opencode/AGENTS.md"
-  sync_one "$h/.gemini/antigravity-cli/AGENTS.md"
-  sync_one "$h/.gemini/GEMINI.md"
+  extras=()
+  if [ "${h##*/}" = "045650" ]; then
+    extras+=(company.md)
+  fi
+  sync_one "$h/.codex/AGENTS.md" "${extras[@]}" AGENTS.gpt.md
+  sync_one "$h/.claude/CLAUDE.md" "${extras[@]}"
+  sync_one "$h/.config/opencode/AGENTS.md" "${extras[@]}"
+  sync_one "$h/.gemini/antigravity-cli/AGENTS.md" "${extras[@]}"
+  sync_one "$h/.gemini/GEMINI.md" "${extras[@]}"
 done
 
 if [ "$found_home" -eq 0 ]; then
@@ -46,10 +50,15 @@ fi
 
 # ChatGPT has no file entrypoint and is updated by manual paste, so stamp the build with the
 # commit it came from; comparing stamps is how a stale paste gets noticed.
+chatgpt_sources=(AGENTS.md)
+if [ "${HOME##*/}" = "045650" ]; then
+  chatgpt_sources+=(company.md)
+fi
+chatgpt_sources+=(AGENTS.gpt.md AGENTS.chatgpt.md)
 version="$(git -C "$SRC" log -1 --format='%cd · %h' --date=short)"
-if [ -n "$(git -C "$SRC" status --porcelain -- AGENTS.md AGENTS.gpt.md AGENTS.chatgpt.md)" ]; then
+if [ -n "$(git -C "$SRC" status --porcelain -- "${chatgpt_sources[@]}")" ]; then
   version="$version（含未提交修改）"
 fi
 mkdir -p "$SRC/dist"
-{ printf '版本：%s\n\n' "$version"; cat "$SRC/AGENTS.md" "$SRC/AGENTS.gpt.md" "$SRC/AGENTS.chatgpt.md"; } > "$SRC/dist/chatgpt.md"
+{ printf '版本：%s\n\n' "$version"; (cd "$SRC" && cat "${chatgpt_sources[@]}"); } > "$SRC/dist/chatgpt.md"
 echo "built $SRC/dist/chatgpt.md"
